@@ -1,10 +1,12 @@
 var timeLeft = 60;
+//timer
 document.getElementById("start").addEventListener("click",function(){
     document.getElementById("start-area").style.display = "none"
     document.getElementById("quiz-area").style.display = "block"
     displayQuestion()
     countdown();
 })
+//Questions
 var question = [
     {
         question:"JavaScript uses what kind of interface to access the DOM structure?",
@@ -27,6 +29,7 @@ var question = [
         answer:"That the computer does not think that the variables name and Name are the same thing."
     }
 ]
+//text display
 var questionIndex = 0
 function displayQuestion(){
     if(questionIndex < question.length){
@@ -42,7 +45,7 @@ function displayQuestion(){
 
 }
 var playerScore = 0
-
+//Listeners
 document.getElementById("quiz-area").addEventListener("click", function(event){
 if(event.target.nodeName === "BUTTON"){
     console.log(event)
@@ -61,18 +64,28 @@ if(event.target.nodeName === "BUTTON"){
    }else{
     console.log("end quiz")
     console.log("playerScore", playerScore)
-    // end quiz and score 
+    // end quiz
 
    }
-   
-
-    // if statement to see if question exists
-    // else display final results function time left and how many correct 
     }  
     
    
 })
-
+//next function
+function nextQuestion(event){
+    if(this.textContent +++ questions[questionCounter].correctAnswer){
+        questionCounter++;
+        showResult('correct');
+    }
+}
+function showResult(result) {
+    var resultInterval;
+    if(result === 'correct') {
+        document.querySelector('resultRight').textContent = "Right!";
+    } else {
+        document.querySelector('resultWrong').textContent = "Wrong!";
+    }
+}
 
 var timerEl = document.getElementById('countdown');
 
@@ -87,15 +100,12 @@ var timerInterval = setInterval(function () {
     }else{
         clearInterval(timerInterval);
         timerEl.textContent = "";
-        // function displayInital(
+        // start screen
         document.getElementById("quiz-area").innerHTML = `<h1>${timeLeft}</h1>`
-        // document.getElementById("done").style.display = "block"
-        // )
         console.log("done")
             if(secondsLeft < 0) {
-      // Stops execution of action at set interval
+      // Times up
       clearInterval(timerInterval);
-      // Calls function to create and append image
     }
     }
     
@@ -103,9 +113,8 @@ var timerInterval = setInterval(function () {
 console.log(countdown)
   }, 1000);
 }
-
+//Game Over
 function endGame(){
-    // clearInterval(timerInterval);
     timerEl.textContent = "";
     secondsLeft = 0
     alert(`your score is ${playerScore}`)
